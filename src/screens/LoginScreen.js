@@ -1,54 +1,20 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
-import { Button, Input } from "@rneui/base";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { auth } from "../firebase/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { View, StyleSheet } from "react-native";
+import React from "react";
+
+import SignUpForm from "../components/SignUpForm";
 const LoginScreen = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleSignUp = () => {
-    createUserWithEmailAndPassword(auth, email, password).then(
-      (userCredentials) => {
-        const user = userCredentials.user;
-        console.log(user.email);
-      }
-    );
-  };
-
   return (
-    <View>
-      <Text>LoginScreen</Text>
-
-      <Input
-        disabledInputStyle={{ background: "#ddd" }}
-        errorMessage="Oops! that's not correct."
-        label="User Form"
-        leftIcon={<Icon name="account-outline" size={20} />}
-        rightIcon={<Icon name="close" size={20} />}
-        placeholder="Enter Name"
-        onChangeText={(text) => setEmail(text)}
-        value={email}
-      />
-
-      <Input
-        disabledInputStyle={{ background: "#ddd" }}
-        errorMessage="Oops! that's not correct."
-        label="User Form"
-        leftIcon={<Icon name="account-outline" size={20} />}
-        rightIcon={<Icon name="close" size={20} />}
-        placeholder="Enter password"
-        onChangeText={(text) => setPassword(text)}
-        value={password}
-        secureTextEntry
-      />
-
-      <TouchableOpacity>
-        <Button title="Register" onPress={handleSignUp}></Button>
-      </TouchableOpacity>
+    <View style={styles.container}>
+      <SignUpForm />
     </View>
   );
 };
-
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
 export default LoginScreen;
