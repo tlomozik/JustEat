@@ -1,8 +1,8 @@
 import { View, Text, StyleSheet } from "react-native";
-
 import { useUser } from "../context/UserContext";
 import SearchBar from "../components/SearchBar";
 import Categories from "../components/Categories";
+import ResultsList from "../components/ResultsList";
 const HomeScreen = ({ navigation }) => {
   const user = useUser();
 
@@ -10,6 +10,7 @@ const HomeScreen = ({ navigation }) => {
     <View style={styles.containerStyle}>
       <SearchBar />
       <Categories />
+      <ResultsList />
     </View>
   );
 };
