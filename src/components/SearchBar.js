@@ -23,9 +23,9 @@ const SearchBar = () => {
 export default SearchBar;
 
 const styles = StyleSheet.create({
-  containerStyle: { marginBottom: 15 },
+  containerStyle: { marginBottom: 5 },
   inputContainerStyle: {
-    elevation: 20,
+    elevation: 15,
     opacity: 2,
   },
   inputStyle: { color: "#2B2D42" },

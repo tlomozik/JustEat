@@ -1,29 +1,37 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import React from "react";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
-import { Image } from "@rneui/base";
+import { Image, Text } from "@rneui/base";
 
 const Categories = () => {
+  const icons = [
+    {
+      url: "https://img.icons8.com/plasticine/100/undefined/hamburger.png",
+      name: "Fast Food",
+    },
+
+    {
+      url: "https://img.icons8.com/plasticine/100/undefined/the-toast.png",
+      name: "Drinks",
+    },
+
+    {
+      url: "https://img.icons8.com/plasticine/100/undefined/sushi.png",
+      name: "Asian",
+    },
+  ];
+
   return (
     <View style={styles.categoriesStyle}>
-      <TouchableOpacity>
-        <Image
-          source={require("../../assets/food.png")}
-          containerStyle={styles.imgStyle}
-        />
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <Image
-          source={require("../../assets/drinks.png")}
-          containerStyle={styles.imgStyle}
-        />
-      </TouchableOpacity>
+      {icons.map((icon, index) => (
+        <TouchableOpacity style={{ alignItems: "center" }}>
+          <Image source={{ uri: icon.url }} containerStyle={styles.imgStyle} />
+          <Text style={{ fontWeight: "bold" }}>{icon.name}</Text>
+        </TouchableOpacity>
+      ))}
     </View>
   );
 };
-
+("https://img.icons8.com/plasticine/100/undefined/sushi.png");
 export default Categories;
 
 const styles = StyleSheet.create({
@@ -32,8 +40,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
   },
   imgStyle: {
-    width: 100,
-    height: 100,
+    width: 60,
+    height: 60,
     resizeMode: "contain",
     transition: 5,
   },

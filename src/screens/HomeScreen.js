@@ -3,14 +3,17 @@ import { useUser } from "../context/UserContext";
 import SearchBar from "../components/SearchBar";
 import Categories from "../components/Categories";
 import ResultsList from "../components/ResultsList";
+import { ScrollView } from "react-native-gesture-handler";
 const HomeScreen = ({ navigation }) => {
   const user = useUser();
 
   return (
     <View style={styles.containerStyle}>
       <SearchBar />
-      <Categories />
-      <ResultsList />
+      <ScrollView showsVerticalScrollIndicator={false} style={{}}>
+        <Categories />
+        <ResultsList />
+      </ScrollView>
     </View>
   );
 };
