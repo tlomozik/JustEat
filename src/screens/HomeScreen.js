@@ -1,22 +1,20 @@
 import { View, Text, StyleSheet } from "react-native";
-import React from "react";
-import { Button } from "@rneui/base";
 
+import { useUser } from "../context/UserContext";
+import SearchBar from "../components/SearchBar";
+import Categories from "../components/Categories";
 const HomeScreen = ({ navigation }) => {
-  return (
-    <View>
-      <Text>HomeScreen</Text>
+  const user = useUser();
 
-      <Button
-        title="Go to Details"
-        onPress={() =>
-          navigation.navigate("Profile", {
-            userID: "jane",
-          })
-        }
-      />
+  return (
+    <View style={styles.containerStyle}>
+      <SearchBar />
+      <Categories />
     </View>
   );
 };
 
+const styles = StyleSheet.create({
+  containerStyle: { flex: 1, backgroundColor: "#EDF2F4" },
+});
 export default HomeScreen;
