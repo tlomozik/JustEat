@@ -4,8 +4,12 @@ import SearchBar from "../components/SearchBar";
 import Categories from "../components/Categories";
 import ResultsList from "../components/ResultsList";
 import { ScrollView } from "react-native-gesture-handler";
+import useResults from "../hooks/useResults";
+
 const HomeScreen = ({ navigation }) => {
   const user = useUser();
+
+  const [searchApi, results, errorMessage] = useResults();
 
   return (
     <View style={styles.containerStyle}>
