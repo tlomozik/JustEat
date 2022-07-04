@@ -1,15 +1,15 @@
 import { View, StyleSheet } from "react-native";
 import { Button, Text, Card } from "@rneui/base";
-import { auth } from "../firebase/firebase";
-import SignOutButton from "../components/SignOutButton";
+import SignOutButton from "../components/login/SignOutButton";
 import { useUser } from "../context/UserContext";
-import { isLoggedIn } from "../utils/isLoggedIn";
+
 const ProfileScreen = () => {
   const user = useUser();
-
+  console.log(user);
   return (
     <View style={styles.containerStyle}>
       <Card containerStyle={styles.cardStyle}>
+        <Text h4>{user?.displayName}</Text>
         <Text h4>{user?.email}</Text>
       </Card>
       <SignOutButton />

@@ -1,6 +1,6 @@
 import { TouchableOpacity, StyleSheet } from "react-native";
 import { Card, Text } from "@rneui/themed";
-import signout from "../containers/auth/signout";
+import signout from "../../containers/auth/signout";
 import { useNavigation } from "@react-navigation/native";
 const SignOutButton = () => {
   const navigation = useNavigation();

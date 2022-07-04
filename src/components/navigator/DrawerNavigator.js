@@ -4,8 +4,8 @@ import LoginScreen from "../../screens/LoginScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { AntDesign } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native";
 import { isLoggedIn } from "../../utils/isLoggedIn";
+import RestaurantScreen from "../../screens/RestaurantScreen";
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
@@ -51,6 +51,17 @@ const DrawerNavigator = () => {
           component={HomeScreen}
           options={{
             title: "Home",
+            drawerIcon: ({ focused, size }) => (
+              <AntDesign name="home" size={24} color="black" />
+            ),
+          }}
+        />
+
+        <Drawer.Screen
+          name="Details"
+          component={RestaurantScreen}
+          options={{
+            title: "Details",
             drawerIcon: ({ focused, size }) => (
               <AntDesign name="home" size={24} color="black" />
             ),

@@ -4,13 +4,14 @@ import { Button, Input, Text } from "@rneui/base";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
-import signup from "../containers/auth/signup";
-import signin from "../containers/auth/signin";
+import signup from "../../containers/auth/signup";
+import signin from "../../containers/auth/signin";
 import { useNavigation } from "@react-navigation/native";
 
 const SignUpForm = ({ type }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const navigation = useNavigation();
   return (
     <View>
@@ -49,16 +50,28 @@ const SignUpForm = ({ type }) => {
           Sign in
         </Button>
       ) : (
-        <Button
-          buttonStyle={styles.buttonStyle}
-          type="solid"
-          onPress={() => {
-            signup({ email, password }), navigation.navigate("Home");
-          }}
-        >
-          <Feather name="check" size={24} color="black" />
-          Sign up
-        </Button>
+        <View>
+          <Input
+            disabledInputStyle={{ background: "#ddd" }}
+            label="Name"
+            containerStyle={{ width: 300 }}
+            leftIcon={<AntDesign name="user" size={20} color="black" />}
+            placeholder="Enter Name"
+            onChangeText={(text) => setName(text)}
+            value={name}
+          />
+
+          <Button
+            buttonStyle={styles.buttonStyle}
+            type="solid"
+            onPress={() => {
+              signup({ email, password, name }), navigation.navigate("Home");
+            }}
+          >
+            <Feather name="check" size={24} color="black" />
+            Sign up
+          </Button>
+        </View>
       )}
     </View>
   );

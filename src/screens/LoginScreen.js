@@ -1,9 +1,8 @@
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { useState } from "react";
 import { Card, Text } from "@rneui/themed";
-import LoginForm from "../components/LoginForm";
+import LoginForm from "../components/login/LoginForm";
 
-import { isLoggedIn } from "../utils/isLoggedIn";
 const LoginScreen = () => {
   const [switcher, setSwitcher] = useState(false);
 

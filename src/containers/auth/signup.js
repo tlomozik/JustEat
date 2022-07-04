@@ -1,21 +1,16 @@
 import { auth } from "../../firebase/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
-export default ({ email, password }) => {
+export default ({ email, password, name }) => {
+  console.log(name);
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredentials) => {
-      const user = userCredentials.user;
+      updateProfile(auth.currentUser, {
+        displayName: name,
+      });
     })
     .catch((error) => {
       console.log(error.code);
       console.log(error.message);
     });
-
-  // useEffect(() => {
-  //   const unsubscribe = auth.onAuthStateChanged((user) => {
-  //     setCurrentUser(user);
-  //     setLoading(false);
-  //   });
-  //   return unsubscribe;
-  // }, []);
 };
