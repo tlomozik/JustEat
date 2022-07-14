@@ -1,16 +1,28 @@
 import { View, Text, StyleSheet } from "react-native";
 import SearchBar from "../components/home/SearchBar";
-import Categories from "../components/home/Categories";
 import ResultsList from "../components/home/ResultsList";
 import { ScrollView } from "react-native-gesture-handler";
-
+import { useState } from "react";
 const HomeScreen = ({ navigation }) => {
+  const [city, setCity] = useState("Wrocław");
+  const [category, setCategory] = useState("hotdogs");
+
+  const changeCityHandler = (city) => {
+    setCity(city);
+  };
+
+  const changeCategoryHandler = (category) => {
+    setCategory(category);
+  };
+
   return (
     <View style={styles.containerStyle}>
-      <SearchBar />
-      <ScrollView showsVerticalScrollIndicator={false} style={{}}>
-        <Categories />
-        <ResultsList />
+      <SearchBar
+        changeCityHandler={changeCityHandler}
+        changeCategoryHandler={changeCategoryHandler}
+      />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <ResultsList city={city} category={category} navigation={navigation} />
       </ScrollView>
     </View>
   );

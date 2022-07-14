@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import RestaurantDetail from "../components/restaurantDetail/RestaurantDetail";
-const RestaurantScreen = () => {
+const RestaurantScreen = ({ route }) => {
   return (
-    <View>
-      <RestaurantDetail />
+    <View style={{ backgroundColor: "white" }}>
+      <RestaurantDetail route={route} />
     </View>
   );
 };

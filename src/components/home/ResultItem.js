@@ -3,16 +3,14 @@ import { Card, Image } from "@rneui/base";
 import { Rating } from "react-native-ratings";
 const ResultItem = ({ name, image, rating, reviews }) => {
   return (
-    <TouchableOpacity>
-      <Card containerStyle={styles.containerStyle}>
-        <ResultImage image={image} />
-        <Card.Divider />
-        <View style={styles.itemDetailsStyle}>
-          <ResultInfo name={name} />
-          <ResultRating rating={rating} reviews={reviews} />
-        </View>
-      </Card>
-    </TouchableOpacity>
+    <Card containerStyle={styles.containerStyle}>
+      <ResultImage image={image} />
+      <Card.Divider />
+      <View style={styles.itemDetailsStyle}>
+        <ResultInfo name={name} />
+        <ResultRating rating={rating} reviews={reviews} />
+      </View>
+    </Card>
   );
 };
 
