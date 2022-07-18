@@ -1,7 +1,9 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { Card, Image } from "@rneui/base";
-import { ScrollView } from "react-native-gesture-handler";
+import { StyleSheet, View } from "react-native";
+import { Card, Image, Text } from "@rneui/base";
+
 import MenuItems from "./MenuItems";
+import ViewCart from "./ViewCart";
+
 const restaurantDetail = ({ route }) => {
   const { title, description, image } = route.params;
 
@@ -11,9 +13,8 @@ const restaurantDetail = ({ route }) => {
       <RestaurantTitle title={title} />
       <RestaurantDescription description={description} />
 
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <MenuItems />
-      </ScrollView>
+      <MenuItems />
+      <ViewCart />
     </View>
   );
 };
@@ -41,7 +42,6 @@ export default restaurantDetail;
 
 const styles = StyleSheet.create({
   restaurantDetailsStyle: {
-    margin: 10,
     paddingBottom: 520,
   },
 
@@ -54,9 +54,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 20,
     fontWeight: "bold",
+    margin: 5,
   },
 
   descriptionStyle: {
     fontWeight: "bold",
+    margin: 5,
   },
 });
