@@ -1,15 +1,23 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import React from "react";
 import { Card, Image } from "@rneui/base";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-import { ScrollView } from "react-native";
+import {
+  ADD_TO_CART,
+  DELETE_FROM_CART,
+} from "../../redux/reducers/restaurantSlice";
+import { useSelector, useDispatch } from "react-redux";
 const MenuItems = () => {
+  const count = useSelector((state) => state.restaurant.selectedItems);
+  const dispatch = useDispatch();
+
+  console.log(count);
   const foods = [
     {
       title: "Kotlet mielony",
       description:
         "Kotlety mielone z tłuczonymi ziemniakami i smażonymi buraczkami. Klasyka w najlepszym wydaniu!",
-      price: "22zł",
+      price: "14zł",
       image:
         "https://www.kwestiasmaku.com/sites/v123.kwestiasmaku.com/files/mielone_2.jpg",
     },
@@ -17,41 +25,17 @@ const MenuItems = () => {
       title: "Kotlet schabowy",
       description:
         "Usmażone schabowe odsączyć z tłuszczu na papierowym ręczniku i podawać z ziemniakami i kapustą lub mizerią.",
-      price: "25zł",
+      price: "17zł",
       image:
         "https://www.kwestiasmaku.com/sites/v123.kwestiasmaku.com/files/schabowe_02.jpg",
     },
     {
-      title: "Kotlet schabowy",
+      title: "Gołąbki tradycyjne",
       description:
-        "Usmażone schabowe odsączyć z tłuszczu na papierowym ręczniku i podawać z ziemniakami i kapustą lub mizerią.",
-      price: "25zł",
+        "Zawijać jak krokiety (najpierw założyć liść na mięso z jednej strony, później złożyć boki do środka, następnie zwinąć jak najciaśniej do końca pozostałą część liścia). Nie cała kapusta musi być wykorzystana.",
+      price: "20zł",
       image:
-        "https://www.kwestiasmaku.com/sites/v123.kwestiasmaku.com/files/schabowe_02.jpg",
-    },
-    {
-      title: "Kotlet schabowy",
-      description:
-        "Usmażone schabowe odsączyć z tłuszczu na papierowym ręczniku i podawać z ziemniakami i kapustą lub mizerią.",
-      price: "25zł",
-      image:
-        "https://www.kwestiasmaku.com/sites/v123.kwestiasmaku.com/files/schabowe_02.jpg",
-    },
-    {
-      title: "Kotlet schabowy",
-      description:
-        "Usmażone schabowe odsączyć z tłuszczu na papierowym ręczniku i podawać z ziemniakami i kapustą lub mizerią.",
-      price: "25zł",
-      image:
-        "https://www.kwestiasmaku.com/sites/v123.kwestiasmaku.com/files/schabowe_02.jpg",
-    },
-    {
-      title: "Kotlet schabowy",
-      description:
-        "Usmażone schabowe odsączyć z tłuszczu na papierowym ręczniku i podawać z ziemniakami i kapustą lub mizerią.",
-      price: "25zł",
-      image:
-        "https://www.kwestiasmaku.com/sites/v123.kwestiasmaku.com/files/schabowe_02.jpg",
+        "https://www.kwestiasmaku.com/sites/v123.kwestiasmaku.com/files/golabki_01_1.jpg",
     },
   ];
 
@@ -65,10 +49,16 @@ const MenuItems = () => {
             wrapperStyle={styles.menuItemStyle}
           >
             <BouncyCheckbox
-              onPress={() => {}}
+              onPress={(checkboxValue) => {
+                if (checkboxValue) {
+                  dispatch(ADD_TO_CART(food));
+                } else {
+                  dispatch(DELETE_FROM_CART(food));
+                }
+              }}
               fillColor="black"
               iconStyle={{
-                borderRadius: 10, // to make it a little round increase the value accordingly
+                borderRadius: 10,
                 borderColor: "black",
               }}
             />

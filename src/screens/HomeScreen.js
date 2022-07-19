@@ -1,7 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import SearchBar from "../components/home/SearchBar";
 import ResultsList from "../components/home/ResultsList";
-import { ScrollView } from "react-native-gesture-handler";
 import { useState } from "react";
 const HomeScreen = ({ navigation }) => {
   const [city, setCity] = useState("Wrocław");
@@ -21,9 +20,8 @@ const HomeScreen = ({ navigation }) => {
         changeCityHandler={changeCityHandler}
         changeCategoryHandler={changeCategoryHandler}
       />
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <ResultsList city={city} category={category} navigation={navigation} />
-      </ScrollView>
+
+      <ResultsList city={city} category={category} navigation={navigation} />
     </View>
   );
 };

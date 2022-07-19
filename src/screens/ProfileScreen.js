@@ -13,6 +13,7 @@ const ProfileScreen = () => {
 
         <Text h4>{user?.email}</Text>
       </Card>
+
       <SignOutButton />
     </View>
   );

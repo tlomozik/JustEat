@@ -42,7 +42,7 @@ export default restaurantDetail;
 
 const styles = StyleSheet.create({
   restaurantDetailsStyle: {
-    paddingBottom: 520,
+    paddingBottom: 550,
   },
 
   resultImage: {
