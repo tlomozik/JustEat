@@ -1,46 +1,91 @@
-import { StyleSheet, View, TouchableOpacity } from "react-native";
-import React from "react";
+import { StyleSheet, View, TouchableOpacity, Modal } from "react-native";
+import { useState } from "react";
 import { Text } from "@rneui/base";
 import { useSelector } from "react-redux";
 
-const ViewCart = () => {
+const ViewCart = ({ modalVisible, setModalVisible }) => {
   const items = useSelector((state) => state.restaurant.selectedItems);
 
   const total = items
     .map((item) => Number(item.price.replace("zł", "")))
     .reduce((prev, curr) => prev + curr, 0);
-  console.log(total);
-  return (
-    <View
-      style={{
-        position: "absolute",
-        zIndex: 999,
-        width: "100%",
-        top: "90%",
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "flex-end",
-      }}
-    >
-      <TouchableOpacity
+
+  const checkoutModal = () => {
+    return (
+      <View
         style={{
-          elevation: 5,
-          position: "relative",
-          width: 300,
-          height: 40,
-          backgroundColor: "black",
-          borderRadius: 30,
+          backgroundColor: "#bcb8b1",
           alignItems: "center",
-          justifyContent: "space-around",
-          flexDirection: "row",
+          justifyContent: "flex-end",
+          top: "50%",
+          height: 300,
+          elevation: 5,
+          margin: 10,
+          borderRadius: 10,
         }}
       >
-        <Text style={{ color: "white", fontSize: 20 }}>View Cart</Text>
-        {total ? (
-          <Text style={{ color: "white", fontSize: 20 }}> {total}zł </Text>
-        ) : null}
-      </TouchableOpacity>
-    </View>
+        <TouchableOpacity
+          onPress={() => setModalVisible(false)}
+          style={{
+            borderRadius: 10,
+            elevation: 5,
+            backgroundColor: "black",
+            width: 150,
+            alignItems: "center",
+            padding: 10,
+            margin: 20,
+          }}
+        >
+          <Text style={{ color: "#fff" }}> Checkout</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
+  return (
+    <>
+      <Modal
+        animationType="slide"
+        visible={modalVisible}
+        transparent={true}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        {checkoutModal()}
+      </Modal>
+
+      {total && !modalVisible ? (
+        <View
+          style={{
+            position: "absolute",
+            zIndex: 1,
+            width: "100%",
+            top: "90%",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "flex-end",
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => setModalVisible(true)}
+            style={{
+              elevation: 5,
+              position: "relative",
+              width: 250,
+              height: 40,
+              backgroundColor: "black",
+              borderRadius: 40,
+              alignItems: "center",
+              justifyContent: "space-around",
+              flexDirection: "row",
+            }}
+          >
+            <Text style={{ color: "white", fontSize: 20 }}>View Cart</Text>
+
+            <Text style={{ color: "white", fontSize: 20 }}> {total}zł </Text>
+          </TouchableOpacity>
+        </View>
+      ) : null}
+    </>
   );
 };
 
