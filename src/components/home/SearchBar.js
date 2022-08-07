@@ -92,6 +92,7 @@ const SearchBar = (props) => {
       <View style={styles.categoriesStyle}>
         {icons.map((icon, index) => (
           <TouchableOpacity
+            key={index}
             onPress={() => props.changeCategoryHandler(icon.searchName)}
             style={{ alignItems: "center" }}
           >

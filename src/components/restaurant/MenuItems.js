@@ -7,37 +7,10 @@ import {
   DELETE_FROM_CART,
 } from "../../redux/reducers/restaurantSlice";
 import { useSelector, useDispatch } from "react-redux";
-const MenuItems = () => {
+const MenuItems = ({ useCheckBox, foods }) => {
   const count = useSelector((state) => state.restaurant.selectedItems);
   const dispatch = useDispatch();
-
-  console.log(count);
-  const foods = [
-    {
-      title: "Kotlet mielony",
-      description:
-        "Kotlety mielone z tłuczonymi ziemniakami i smażonymi buraczkami. Klasyka w najlepszym wydaniu!",
-      price: "14zł",
-      image:
-        "https://www.kwestiasmaku.com/sites/v123.kwestiasmaku.com/files/mielone_2.jpg",
-    },
-    {
-      title: "Kotlet schabowy",
-      description:
-        "Usmażone schabowe odsączyć z tłuszczu na papierowym ręczniku i podawać z ziemniakami i kapustą lub mizerią.",
-      price: "17zł",
-      image:
-        "https://www.kwestiasmaku.com/sites/v123.kwestiasmaku.com/files/schabowe_02.jpg",
-    },
-    {
-      title: "Gołąbki tradycyjne",
-      description:
-        "Zawijać jak krokiety (najpierw założyć liść na mięso z jednej strony, później złożyć boki do środka, następnie zwinąć jak najciaśniej do końca pozostałą część liścia). Nie cała kapusta musi być wykorzystana.",
-      price: "20zł",
-      image:
-        "https://www.kwestiasmaku.com/sites/v123.kwestiasmaku.com/files/golabki_01_1.jpg",
-    },
-  ];
+  console.log(useCheckBox);
 
   return (
     <>
@@ -48,20 +21,23 @@ const MenuItems = () => {
             containerStyle={{ elevation: 0, borderColor: "white" }}
             wrapperStyle={styles.menuItemStyle}
           >
-            <BouncyCheckbox
-              onPress={(checkboxValue) => {
-                if (checkboxValue) {
-                  dispatch(ADD_TO_CART(food));
-                } else {
-                  dispatch(DELETE_FROM_CART(food));
-                }
-              }}
-              fillColor="black"
-              iconStyle={{
-                borderRadius: 10,
-                borderColor: "black",
-              }}
-            />
+            {useCheckBox ? (
+              <BouncyCheckbox
+                onPress={(checkboxValue) => {
+                  if (checkboxValue) {
+                    dispatch(ADD_TO_CART(food));
+                  } else {
+                    dispatch(DELETE_FROM_CART(food));
+                  }
+                }}
+                fillColor="black"
+                iconStyle={{
+                  borderRadius: 10,
+                  borderColor: "black",
+                }}
+              />
+            ) : null}
+
             <MenuItemInfo
               title={food.title}
               description={food.description}

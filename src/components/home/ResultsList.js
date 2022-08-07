@@ -32,7 +32,7 @@ const ResultsList = ({ city, category, navigation }) => {
               })
             }
           >
-            <View key={index} style={styles.resultListStyle}>
+            <View style={styles.resultListStyle}>
               <ResultItem
                 name={result.name}
                 image={result.image_url ? result.image_url : null}

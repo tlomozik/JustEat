@@ -1,9 +1,10 @@
 import { StyleSheet, View, TouchableOpacity, Modal } from "react-native";
-import { useState } from "react";
 import { Text } from "@rneui/base";
 import { useSelector } from "react-redux";
-
-const ViewCart = ({ modalVisible, setModalVisible }) => {
+import OrderItem from "./OrderItem";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { db } from "../../firebase/firebase.js";
+const ViewCart = ({ modalVisible, setModalVisible, title, navigation }) => {
   const items = useSelector((state) => state.restaurant.selectedItems);
 
   const total = items
@@ -14,9 +15,9 @@ const ViewCart = ({ modalVisible, setModalVisible }) => {
     return (
       <View
         style={{
-          backgroundColor: "#bcb8b1",
+          backgroundColor: "#8d99ae",
           alignItems: "center",
-          justifyContent: "flex-end",
+          justifyContent: "center",
           top: "50%",
           height: 300,
           elevation: 5,
@@ -24,8 +25,9 @@ const ViewCart = ({ modalVisible, setModalVisible }) => {
           borderRadius: 10,
         }}
       >
+        <OrderItem total={total} />
         <TouchableOpacity
-          onPress={() => setModalVisible(false)}
+          onPress={() => addOrderToFireBase()}
           style={{
             borderRadius: 10,
             elevation: 5,
@@ -41,6 +43,27 @@ const ViewCart = ({ modalVisible, setModalVisible }) => {
       </View>
     );
   };
+
+  const addOrderToFireBase = async () => {
+    try {
+      const docRef = await addDoc(collection(db, "orders"), {
+        items: items,
+        title: title,
+        createdAt: serverTimestamp(),
+      });
+
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+
+    setModalVisible(false);
+    navigation.navigate("OrderCompleted", { title: title });
+  };
+
+  // useEffect(() => {
+  //   addOrderToFireBase();
+  // }, [items]);
 
   return (
     <>

@@ -6,6 +6,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { AntDesign } from "@expo/vector-icons";
 import { isLoggedIn } from "../../utils/isLoggedIn";
 import RestaurantScreen from "../../screens/RestaurantScreen";
+import OrderCompletedScreen from "../../screens/OrderCompletedScreen";
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
@@ -61,10 +62,19 @@ const DrawerNavigator = () => {
           name="Details"
           component={RestaurantScreen}
           options={{
-            title: "Details",
-            drawerIcon: ({ focused, size }) => (
-              <AntDesign name="home" size={24} color="black" />
-            ),
+            drawerItemStyle: {
+              display: "none",
+            },
+          }}
+        />
+
+        <Drawer.Screen
+          name="OrderCompleted"
+          component={OrderCompletedScreen}
+          options={{
+            drawerItemStyle: {
+              // display: "none",
+            },
           }}
         />
       </Drawer.Navigator>
